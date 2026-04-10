@@ -99,7 +99,8 @@ export default function Index({ theme, toggleTheme }: Props) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageMime, setImageMime] = useState<string>("image/jpeg");
@@ -172,12 +173,14 @@ export default function Index({ theme, toggleTheme }: Props) {
     setMessages([]);
     setInput("");
     clearImage();
-    setTimeout(() => inputRef.current?.focus(), 100);
+    if (window.innerWidth < 768) setSidebarOpen(false);
+    if (window.innerWidth >= 768) setTimeout(() => inputRef.current?.focus(), 100);
   };
 
   const selectConversation = (convId: string) => {
     setActiveConvId(convId);
     setActiveTab("chats");
+    if (window.innerWidth < 768) setSidebarOpen(false);
   };
 
   const clearImage = () => {
@@ -263,7 +266,7 @@ export default function Index({ theme, toggleTheme }: Props) {
       setMessages(prev => [...prev, errMsg]);
     } finally {
       setLoading(false);
-      setTimeout(() => inputRef.current?.focus(), 100);
+      if (window.innerWidth >= 768) setTimeout(() => inputRef.current?.focus(), 100);
     }
   };
 
@@ -306,12 +309,22 @@ export default function Index({ theme, toggleTheme }: Props) {
   ];
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-foreground">
+    <div className="flex h-[100dvh] overflow-hidden bg-background text-foreground">
+
+      {/* Mobile overlay backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
       <aside className={`
-        flex flex-col border-r border-border transition-all duration-300 overflow-hidden flex-shrink-0
-        ${sidebarOpen ? "w-64" : "w-0"}
+        flex flex-col border-r border-border transition-all duration-300 flex-shrink-0 overflow-hidden
+        md:relative md:translate-x-0
+        fixed top-0 left-0 h-full z-30
+        ${sidebarOpen ? "translate-x-0 w-72 md:w-64" : "-translate-x-full w-72 md:w-0 md:-translate-x-0"}
         bg-[hsl(var(--sidebar-background))]
       `}>
         <div className="flex items-center justify-between p-4 border-b border-border">
@@ -431,12 +444,12 @@ export default function Index({ theme, toggleTheme }: Props) {
       {/* Main */}
       <main className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Header */}
-        <header className="flex items-center gap-3 px-4 py-3 border-b border-border flex-shrink-0">
+        <header className="flex items-center gap-3 px-4 py-3 border-b border-border flex-shrink-0" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))" }}>
           <button
             onClick={() => setSidebarOpen(o => !o)}
-            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+            className="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl hover:bg-muted active:bg-muted transition-colors text-muted-foreground hover:text-foreground"
           >
-            <Icon name={sidebarOpen ? "PanelLeftClose" : "PanelLeft"} size={17} />
+            <Icon name={sidebarOpen ? "PanelLeftClose" : "PanelLeft"} size={20} />
           </button>
 
           <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -461,10 +474,10 @@ export default function Index({ theme, toggleTheme }: Props) {
             )}
             <button
               onClick={createNewChat}
-              className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+              className="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl hover:bg-muted active:bg-muted transition-colors text-muted-foreground hover:text-foreground"
               title="Новый чат"
             >
-              <Icon name="SquarePen" size={16} />
+              <Icon name="SquarePen" size={18} />
             </button>
           </div>
         </header>
@@ -486,8 +499,8 @@ export default function Index({ theme, toggleTheme }: Props) {
                 {hints.map(hint => (
                   <button
                     key={hint}
-                    onClick={() => { setInput(hint); inputRef.current?.focus(); }}
-                    className="text-left text-xs px-3.5 py-3 rounded-xl border border-border bg-card hover:bg-muted hover:border-primary/40 transition-all text-muted-foreground hover:text-foreground leading-relaxed"
+                    onClick={() => { setInput(hint); if (window.innerWidth >= 768) inputRef.current?.focus(); }}
+                    className="text-left text-sm md:text-xs px-4 py-3.5 md:px-3.5 md:py-3 rounded-xl border border-border bg-card hover:bg-muted active:bg-muted hover:border-primary/40 transition-all text-muted-foreground hover:text-foreground leading-relaxed"
                   >
                     {hint}
                   </button>
@@ -550,7 +563,7 @@ export default function Index({ theme, toggleTheme }: Props) {
         </div>
 
         {/* Input */}
-        <div className="px-4 pb-4 pt-2 flex-shrink-0 border-t border-border">
+        <div className="px-3 md:px-4 pb-4 pt-2 flex-shrink-0 border-t border-border" style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}>
           <div className="max-w-3xl mx-auto">
             {imagePreview && (
               <div className="mb-2 relative inline-block">
@@ -583,18 +596,18 @@ export default function Index({ theme, toggleTheme }: Props) {
 
               <button
                 onClick={() => cameraInputRef.current?.click()}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-background/60 transition-colors flex-shrink-0"
+                className="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-background/60 active:bg-background transition-colors flex-shrink-0"
                 title="Сделать фото"
               >
-                <Icon name="Camera" size={16} />
+                <Icon name="Camera" size={18} />
               </button>
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-background/60 transition-colors flex-shrink-0"
+                className="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-background/60 active:bg-background transition-colors flex-shrink-0"
                 title="Прикрепить изображение"
               >
-                <Icon name="Paperclip" size={16} />
+                <Icon name="Paperclip" size={18} />
               </button>
 
               <textarea
@@ -602,26 +615,27 @@ export default function Index({ theme, toggleTheme }: Props) {
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                placeholder="Напишите сообщение... (Enter — отправить)"
+                placeholder="Сообщение..."
                 rows={1}
-                className="flex-1 bg-transparent resize-none outline-none text-sm placeholder:text-muted-foreground leading-relaxed py-1.5 max-h-[180px] overflow-y-auto"
+                className="flex-1 bg-transparent resize-none outline-none text-base md:text-sm placeholder:text-muted-foreground leading-relaxed py-2 md:py-1.5 max-h-[140px] overflow-y-auto"
                 disabled={loading}
+                style={{ fontSize: "16px" }}
               />
 
               <button
                 onClick={handleSend}
                 disabled={loading || (!input.trim() && !imageBase64)}
                 className={`
-                  w-8 h-8 flex items-center justify-center rounded-lg transition-all flex-shrink-0
+                  w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl transition-all flex-shrink-0
                   ${loading || (!input.trim() && !imageBase64)
                     ? "text-muted-foreground/40 cursor-not-allowed"
-                    : "bg-primary text-primary-foreground hover:opacity-90 glow-blue-sm"
+                    : "bg-primary text-primary-foreground hover:opacity-90 active:opacity-80 glow-blue-sm"
                   }
                 `}
               >
                 {loading
-                  ? <Icon name="Loader2" size={16} className="animate-spin" />
-                  : <Icon name="ArrowUp" size={16} />
+                  ? <Icon name="Loader2" size={18} className="animate-spin" />
+                  : <Icon name="ArrowUp" size={18} />
                 }
               </button>
             </div>
