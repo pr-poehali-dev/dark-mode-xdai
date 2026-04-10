@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Send message",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "session_id": "test-session",
+        "message": "Привет! Как дела?"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"reply": "string", "conversation_id": "string"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

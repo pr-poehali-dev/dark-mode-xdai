@@ -4,89 +4,98 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 13% 9%;
+    --foreground: 210 20% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 11%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 11%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 13% 9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 13% 16%;
+    --secondary-foreground: 210 20% 92%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 14%;
+    --muted-foreground: 215 16% 52%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 220 13% 9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 92%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 18%;
+    --input: 220 13% 16%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 220 13% 7%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 220 13% 9%;
+    --sidebar-accent: 220 13% 14%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 220 13% 14%;
+    --sidebar-ring: 217 91% 60%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* XDai custom */
+    --xdai-blue: 217 91% 60%;
+    --xdai-glow: 217 91% 60%;
+    --xdai-surface: 220 13% 11%;
+    --xdai-surface2: 220 13% 14%;
+    --xdai-border: 220 13% 20%;
+    --xdai-text-dim: 215 16% 48%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  .light {
+    --background: 220 20% 97%;
+    --foreground: 220 13% 9%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 9%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 9%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 91% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 13% 93%;
+    --secondary-foreground: 220 13% 9%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 13% 93%;
+    --muted-foreground: 215 16% 46%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 217 91% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 220 13% 87%;
+    --input: 220 13% 93%;
+    --ring: 217 91% 55%;
+
+    --sidebar-background: 220 20% 96%;
+    --sidebar-foreground: 220 13% 20%;
+    --sidebar-primary: 217 91% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 220 13% 92%;
+    --sidebar-accent-foreground: 220 13% 9%;
+    --sidebar-border: 220 13% 87%;
+    --sidebar-ring: 217 91% 55%;
+
+    --xdai-blue: 217 91% 55%;
+    --xdai-glow: 217 91% 55%;
+    --xdai-surface: 0 0% 100%;
+    --xdai-surface2: 220 13% 93%;
+    --xdai-border: 220 13% 87%;
+    --xdai-text-dim: 215 16% 52%;
   }
 }
 
@@ -97,5 +106,160 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
   }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--xdai-border));
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  .font-mono-xdai {
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px hsla(var(--xdai-glow) / 0.25);
+  }
+
+  .glow-blue-sm {
+    box-shadow: 0 0 10px hsla(var(--xdai-glow) / 0.15);
+  }
+
+  .message-enter {
+    animation: messageSlide 0.25s ease-out;
+  }
+
+  .sidebar-item-hover {
+    transition: all 0.15s ease;
+  }
+
+  .typing-dot {
+    animation: typingBounce 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  .pulse-blue {
+    animation: pulseBlue 2s infinite;
+  }
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseBlue {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Markdown-like prose in chat */
+.chat-prose p {
+  margin-bottom: 0.5em;
+}
+.chat-prose p:last-child {
+  margin-bottom: 0;
+}
+.chat-prose code {
+  font-family: "IBM Plex Mono", monospace;
+  background: hsl(var(--muted));
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.chat-prose pre {
+  background: hsl(220 13% 7%);
+  border: 1px solid hsl(var(--xdai-border));
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0.75em 0;
+}
+.chat-prose pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875em;
+}
+.chat-prose ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+.chat-prose ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+.chat-prose li {
+  margin-bottom: 0.25em;
+}
+.chat-prose strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+.chat-prose h1,
+.chat-prose h2,
+.chat-prose h3 {
+  font-weight: 600;
+  margin: 0.75em 0 0.25em;
+}
+
+.light .chat-prose pre {
+  background: hsl(220 13% 94%);
 }
