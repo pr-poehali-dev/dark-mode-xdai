@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Get memory list",
+      "method": "GET",
+      "path": "/?session_id=test-session",
+      "expectedStatus": 200,
+      "expectedBody": {"memory": []},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Add memory item",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "session_id": "test-session",
+        "content": "Тестовая запись в памяти"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"content": "string"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
